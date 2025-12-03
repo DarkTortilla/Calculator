@@ -1,0 +1,45 @@
+.button{
+    height: 83px;
+    display: flex;
+    flex: 1 1;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 38px;
+    background-color: #1b1b32;
+    color: white;
+    border-radius: 25px;
+    border: 2px solid white;
+    margin: 4px;
+    cursor: pointer;
+    user-select: none;
+
+}
+
+.operator{
+    background-color: #00471b;
+}
+
+.operator:hover{
+    background-color: #006628;
+}
+
+.number{
+    background-color: #2d2d5a;
+}
+
+.number:hover{
+    background-color: #3d3d7a;
+}
+
+.primary{
+    background-color: #ff6b35;
+}
+
+.primary:hover{
+    background-color: #ff8555;
+}
+
+.button:active{
+    transform: scale(0.95);
+}
