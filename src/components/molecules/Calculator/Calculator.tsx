@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { evaluate } from "mathjs";
 import Button from "../../atoms/Button/Button";
 import Display from "../../atoms/Display/Display";
 import './Calculator.css';
@@ -11,45 +12,45 @@ type ButtonConfig = {
 
 export default function Calculator() {
     const [display, setDisplay] = useState("0");
-    const [firstOperand, setFirstOperand] = useState<string | null>(null);
-    const [operator, setOperator] = useState<string | null>(null);
-    const [waitingForSecond, setWaitingForSecond] = useState(false);
+
 
     const buttons: ButtonConfig[] = [
-        
+
         { text: "7", type: "number" },
         { text: "8", type: "number" },
         { text: "9", type: "number" },
-        { text: "÷", type: "operator" },
+        { text: "/", type: "operator" },
         { text: "4", type: "number" },
         { text: "5", type: "number" },
         { text: "6", type: "number" },
-        { text: "×", type: "operator" },
-        
+        { text: "*", type: "operator" },
+
         { text: "1", type: "number" },
         { text: "2", type: "number" },
         { text: "3", type: "number" },
         { text: "-", type: "operator" },
         { text: "=", type: "primary" },
-        { text: "0", type: "number"},
+        { text: "0", type: "number" },
         { text: ".", type: "number" },
         { text: "+", type: "operator" },
-        
+
     ];
 
-    const calculate = (a: number, b: number): number => {
-        switch (operator) {
-            case "+": return a + b;
-            case "-": return a - b;
-            case "×": return a * b;
-            case "÷": return b !== 0 ? a / b : NaN;
-            default: return b;
-        }
-    };
+
 
     const handleClick = (text: string) => {
+        if (text !== '=') {
+            setDisplay(prev => prev + text)
+        }
+        else {
+            console.log(display, evaluate(display))
+            setDisplay(evaluate(display));
+
+        }
 
     };
+
+    const resetDisplay = () => setDisplay('')
 
     return (
         <div className="calculator">
@@ -63,6 +64,9 @@ export default function Calculator() {
                         key={i}
                     />
                 ))}
+                <Button onClick={() => { resetDisplay(); return null }}
+                    text='C'
+                    type='primary'></Button>
             </div>
         </div>
     );
